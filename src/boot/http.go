@@ -5,6 +5,7 @@ import (
 	"github.com/savsgio/atreugo/v11"
 	"os"
 	mapvalidator "tuble/src/classes/map-validator"
+	"tuble/src/config"
 	"tuble/src/storage/cache"
 	"tuble/src/utils"
 )
@@ -38,6 +39,9 @@ func StartHTTP() {
 		c.Response.SetBodyString(cache.GetCurrentMap())
 		c.Response.SetStatusCode(200)
 		return nil
+	})
+	server.GET("/config", func(c *atreugo.RequestCtx) error {
+		return c.JSONResponse(config.Map, 200)
 	})
 	server.POST("/validate", func(c *atreugo.RequestCtx) error {
 		bodyBytes := c.Request.Body()

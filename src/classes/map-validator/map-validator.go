@@ -111,8 +111,9 @@ func Validate(input utils.MapInput) (Validation, error) {
 			break
 		}
 		troddenPath = append(troddenPath, coords)
+		prevCoordForConnection := prevCoords
 		prevCoords = coords
-		coords = activeBlock.NextConnectedBlockCoords()
+		coords = activeBlock.NextConnectedBlockCoords(prevCoordForConnection)
 		activeBlock = &input.Map[coords[0]][coords[1]]
 	}
 }

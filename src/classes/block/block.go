@@ -121,10 +121,16 @@ func (b *Block) IsMoveable() bool {
 
 //Map verification.
 
-func (b *Block) NextConnectedBlockCoords() [2]int8 {
-	return ConnectionToCoords(b.Connections[1], b.X, b.Y)
+func (b *Block) NextConnectedBlockCoords(existingCoords [2]int8) [2]int8 {
+	//Pick the connection that isn't the existing one.
+	use := ConnectionToCoords(b.Connections[0], b.X, b.Y)
+	if existingCoords == use {
+		use = ConnectionToCoords(b.Connections[1], b.X, b.Y)
+	}
+	return use
 }
 
 func (b *Block) IsConnectedFrom(prevCoords [2]int8) bool {
-	return prevCoords == ConnectionToCoords(b.Connections[0], b.X, b.Y)
+	//Must be able to handle both orientations of pipes.
+	return (prevCoords == ConnectionToCoords(b.Connections[0], b.X, b.Y)) || (prevCoords == ConnectionToCoords(b.Connections[1], b.X, b.Y))
 }

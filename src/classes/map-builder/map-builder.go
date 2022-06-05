@@ -22,6 +22,7 @@ func New() [][]block.Block {
 	g.initializeVariables()
 	g.createValidPath()
 	g.connectBlocksOnPath()
+	g.randomRotatePathBlocks()
 	return g.gameMap
 }
 
@@ -91,12 +92,17 @@ func (g *Generator) connectBlocksOnPath() {
 			activeBlock.SetType(block.TypeEndpoint)
 			activeBlock.SetSecondConnection(block.NoConnection)
 		}
-
-		//Rotate connections in a controlled manner if not start or finish.
-		if activeBlock.IsMoveable() {
-			//activeBlock.RandomRotate() TODO: Re-enable this.
-		}
 		prevKey = key
+	}
+}
+
+func (g *Generator) randomRotatePathBlocks() {
+	for key := 0; key < len(g.validPath); key++ {
+		coords := g.validPath[key]
+		activeBlock := &g.gameMap[coords[0]][coords[1]]
+		if activeBlock.IsMoveable() {
+			activeBlock.RandomRotate()
+		}
 	}
 }
 
