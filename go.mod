@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/atreugo/cors v1.0.5
-	github.com/go-co-op/gocron v1.13.0
+	github.com/go-co-op/gocron v1.14.0
 	github.com/joho/godotenv v1.4.0
 	github.com/mroth/weightedrand v0.4.1
 	github.com/savsgio/atreugo/v11 v11.9.4
