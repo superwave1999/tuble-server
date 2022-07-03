@@ -1,0 +1,13 @@
+
+[Unit]
+Description=Tuble server component
+
+[Service]
+ExecStart=/var/www/imanol/tuble-server/tuble-server
+WorkingDirectory=/var/www/imanol/tuble-server/
+Restart=always
+RestartSec=60
+PrivateTmp=1
+
+[Install]
+WantedBy=default.target
